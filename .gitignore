@@ -5,9 +5,10 @@
 /bootstrap/cache/
 /storage/
 /.env
+/.env.*
+!.env.example
 .phpunit.result.cache
 .DS_Store
 Thumbs.db
 .idea/
 .vscode/
-!.env.example
