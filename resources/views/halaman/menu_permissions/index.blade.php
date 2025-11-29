@@ -20,7 +20,7 @@
     <form action="{{ route('menu-permissions') }}" method="POST">
       @csrf
       <div class="table-responsive">
-        <table class="table table-striped table-bordered align-middle text-nowrap">
+        <table class="table table-striped table-bordered table-hover align-middle text-nowrap">
           <thead>
             <tr>
               <th>#</th>

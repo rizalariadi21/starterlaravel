@@ -5,6 +5,7 @@
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<meta name="route-name" content="{{ Route::currentRouteName() }}">
 	<meta name="user-id" content="{{ Auth::check() ? Auth::id() : '' }}">
+	<meta name="session-lifetime" content="{{ config('session.lifetime') }}">
 </head>
 @php
 	$bodyClass = (!empty($appBoxedLayout)) ? 'boxed-layout ' : '';
@@ -78,6 +79,21 @@
 	  window.addEventListener('visibilitychange', function(){ if (document.visibilityState==='hidden') sendClose(); });
 	  window.addEventListener('pagehide', sendClose);
 	  window.addEventListener('beforeunload', sendClose);
+	})();
+	</script>
+	<script>
+	(function(){
+	  var csrf = document.querySelector('meta[name="csrf-token"]')?.content || '';
+	  var userId = document.querySelector('meta[name="user-id"]')?.content || '';
+	  if (!userId) return;
+	  var idleMin = parseInt(document.querySelector('meta[name="session-lifetime"]')?.content||'0')||120;
+	  var idleMs = Math.max(1, Math.min(idleMin, 30))*60*1000;
+	  var t;
+	  function reset(){ clearTimeout(t); t = setTimeout(function(){
+	    fetch('/logout',{method:'POST', headers:{'X-CSRF-TOKEN': csrf}}).finally(function(){ location.href='/login'; });
+	  }, idleMs); }
+	  ['click','mousemove','keydown','scroll','touchstart'].forEach(function(e){ window.addEventListener(e, reset, {passive:true}); });
+	  reset();
 	})();
 	</script>
 </body>

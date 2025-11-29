@@ -89,7 +89,7 @@
   </div>
   <div class="panel-body">
     <div class="table-responsive">
-      <table id="data-table-default" width="100%" class="table table-striped table-bordered align-middle text-nowrap">
+      <table id="data-table-default" width="100%" class="table table-striped table-bordered table-hover align-middle text-nowrap">
         <thead>
           <tr>
             <th width="1%"></th>
