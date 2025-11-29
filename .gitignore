@@ -1,0 +1,22 @@
+# Environment files (keep example only)
+/.env
+/.env.*
+!.env.example
+
+# Dependencies and build artifacts
+/vendor/
+/node_modules/
+/public/build/
+/bootstrap/cache/
+
+# Storage (logs, cache, uploads)
+/storage/
+/public/storage/
+
+# Test cache
+/.phpunit.result.cache
+
+# Misc
+npm-debug.log*
+yarn-error.log*
+composer.phar
