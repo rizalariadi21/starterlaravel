@@ -1,7 +1,7 @@
 <?php
 
 Route::get('/', function () {
-    return auth()->check() ? redirect('/starter') : redirect('/login');
+    return redirect('/login');
 });
 
 Route::get('/starter', 'MainController@starter')->name('starter')->middleware(['auth','menu.level']);
@@ -33,3 +33,17 @@ Route::post('/logout', 'MainController@logout')->name('logout');
 Route::get('/health', 'MainController@health')->name('health')->middleware(['auth','level:1']);
 Route::post('/menu-activity', 'MainController@menuActivity')->name('menu-activity')->middleware('auth');
 Route::get('/menu-activity', function(){ return response()->view('errors.403', [], 403); })->name('menu-activity-get');
+
+Route::get('/maintenance/cache-clear', function(\Illuminate\Http\Request $request){
+    $token = env('CACHE_CLEAR_TOKEN');
+    if (!$token || $request->query('token') !== $token) { return response('Forbidden', 403); }
+    try { \Illuminate\Support\Facades\Artisan::call('config:clear'); } catch (\Throwable $e) {}
+    try { \Illuminate\Support\Facades\Artisan::call('cache:clear'); } catch (\Throwable $e) {}
+    try { \Illuminate\Support\Facades\Artisan::call('route:clear'); } catch (\Throwable $e) {}
+    try { \Illuminate\Support\Facades\Artisan::call('view:clear'); } catch (\Throwable $e) {}
+    foreach (['config.php','packages.php','services.php','routes.php','events.php'] as $f) {
+        $p = base_path('bootstrap/cache/'.$f);
+        if (file_exists($p)) { @unlink($p); }
+    }
+    return response('OK', 200);
+})->name('maintenance-cache-clear');

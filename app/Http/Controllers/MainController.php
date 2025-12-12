@@ -569,11 +569,8 @@ class MainController extends Controller {
         $settings = (array) ($data['settings'] ?? []);
         if ($request->hasFile('login_news_image_file')) {
             try {
-                if (!file_exists(public_path('storage'))) { \Illuminate\Support\Facades\Artisan::call('storage:link'); }
-            } catch (\Throwable $e) {}
-            try {
-                $path = $request->file('login_news_image_file')->store('login', 'public');
-                $url = asset('storage/' . $path);
+                $path = $request->file('login_news_image_file')->store('login', 'public_root');
+                $url = asset($path);
                 $settings['login.news_image_url'] = $url;
             } catch (\Throwable $e) {}
         }
