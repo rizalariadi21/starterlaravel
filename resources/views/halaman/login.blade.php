@@ -46,11 +46,11 @@
 						<div class="alert alert-danger">{{ $errors->first('login') }}</div>
 					@endif
 					<div class="form-floating mb-15px">
-						<input name="username" type="text" class="form-control h-45px fs-13px" placeholder="Username" id="username" />
+						<input name="username" type="text" class="form-control h-45px fs-13px" placeholder="Username" id="username"	required/>
 						<label for="username" class="d-flex align-items-center fs-13px text-gray-600">Username</label>
 					</div>
 					<div class="form-floating mb-15px position-relative">
-						<input name="password" type="password" class="form-control h-45px fs-13px" placeholder="Password" id="password" />
+						<input name="password" type="password" class="form-control h-45px fs-13px" placeholder="Password" id="password" required/>
 						<label for="password" class="d-flex align-items-center fs-13px text-gray-600">Password</label>
 						<button type="button" class="btn position-absolute top-50 end-0 translate-middle-y me-2 p-0 text-gray-600" id="togglePassword" aria-label="Show password">
 							<i class="fa fa-eye" id="togglePasswordIcon"></i>
