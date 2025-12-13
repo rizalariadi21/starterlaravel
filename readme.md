@@ -1,3 +1,17 @@
+## Preview Aplikasi
+
+### Login Page
+![Login](docs/as.png)
+
+### Dashboard
+![Dashboard](docs/as1.png)
+
+### Menu Management
+![Menu](docs/as3.png)
+
+### Menu Management
+![Menu](docs/as4.png)
+
 # Starter Laravel Template
 
 Starter Laravel yang siap pakai untuk aplikasi admin dengan autentikasi berbasis tabel `pengguna`, menu dinamis dari database, kontrol akses per-route, dan pengelolaan App Settings. Cocok untuk dipakai di shared hosting seperti Hostinger.
